@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState,useEffect } from 'react'
 import { ethers } from 'ethers'
+import Earned from './earned'
 import { ConnectWallet, useContract, useContractWrite, Web3Button, useAddress, useTokenBalance, useContractRead } from '@thirdweb-dev/react'
 
 
@@ -73,6 +74,7 @@ const Stake = () => {
                     Total RYD: <span id="balance">
                       {stakingTokenBalance?.displayValue}
                     </span>
+                    
                   </p>
                   <p className="pb-2 font-medium text-slate-700">
                     Available Arbritage Token To Stake
@@ -93,6 +95,7 @@ const Stake = () => {
                   accentColor= '#7245FA'
                   >Aprove</Web3Button>
                   </div>
+                  <Earned/>
                   <div className='py-2 px-6'>
                   <Web3Button
                   contractAddress={StakingcontractAddress}

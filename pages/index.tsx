@@ -4,7 +4,8 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import { ConnectWallet } from '@thirdweb-dev/react'
 import Demo from '../components'
-import Stake from '../components/Stake' 
+//import Stake from '../components/Stake' 
+import Earned from '../components/Stake/earned'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -103,7 +104,8 @@ export default function Home() {
             </p>
           </a>
         </div>
-        <Stake />
+        {/*<Stake />*/}
+        <Earned />
       </main>
     </>
   )
