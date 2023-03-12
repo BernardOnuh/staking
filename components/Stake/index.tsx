@@ -1,7 +1,8 @@
 import React from 'react'
 import { useState,useEffect } from 'react'
 import { ethers } from 'ethers'
-import { ConnectWallet, useContract, useContractWrite, Web3Button, useAddress, useTokenBalance } from '@thirdweb-dev/react'
+import { ConnectWallet, useContract, useContractWrite, Web3Button, useAddress, useTokenBalance, useContractRead } from '@thirdweb-dev/react'
+
 
 
 const Stake = () => {
@@ -17,6 +18,23 @@ const Stake = () => {
       const { contract: rewardToken, isLoading:isRewardTokenLoading} = useContract(RewardTokenAddress);
       const { data: stakingTokenBalance, refetch: refetchStakingTokenBalance } = useTokenBalance(stakingToken, address);
       const { data: rewardTokenBalance, refetch: refetchRewardTokenBalance } = useTokenBalance(rewardToken, address);
+      const {
+        data: stakeInfo,
+        refetch: refetchStakingInfo,
+        isLoading: isStakeInfoLoading,
+      } = useContractRead(contract, "balanceOf", address || "0");
+      
+      useEffect(() => {
+        setInterval(() => {
+          refetchData();
+        }, 10000);
+      }, []);
+      
+      const refetchData = () => {
+        refetchRewardTokenBalance();
+        refetchStakingTokenBalance();
+        refetchStakingInfo();
+      };
       
   
   return (
@@ -52,7 +70,9 @@ const Stake = () => {
               <div className="flex flex-col space-y-5">
                 <label htmlFor="number">
                   <p className="pb-2 font-medium text-slate-700">
-                    Total Arbritage Token Staked <span id="balance"></span>
+                    Total RYD: <span id="balance">
+                      {stakingTokenBalance?.displayValue}
+                    </span>
                   </p>
                   <p className="pb-2 font-medium text-slate-700">
                     Available Arbritage Token To Stake
@@ -84,6 +104,7 @@ const Stake = () => {
                     } }>
                     Stake</Web3Button>
                     </div>
+                    
                 <div className='py-2 px-6'>
                 <Web3Button
                 contractAddress={StakingcontractAddress}
@@ -95,11 +116,18 @@ const Stake = () => {
                 >Claim</Web3Button>
                 </div>
                 </label>
+                <p className="pb-2 font-medium text-slate-700">
+                    Total STK: <span id="balance">
+                      {rewardTokenBalance?.displayValue}
+                    </span>
+                  </p>
+                
                 <p className="pb-2 font-medium text-slate-700" id="status" style={{ color: "green" }}></p>
                 <label htmlFor="number">
                   <p className="pb-2 font-medium text-slate-700">
                     Withdraw Token
                   </p>
+                  
                   <input
                    type ='number'
                    value = {withdrawAmount}
@@ -116,9 +144,15 @@ const Stake = () => {
                       ethers.utils.parseEther(withdrawAmount)
                     );
                     } }>
-                    Withdraw</Web3Button>
+                    Unstake</Web3Button>
                     </div>
                 </label>
+                <p className='text-black'>
+                Balance Of:  
+                </p>            
+                <p className='text-black'>
+                 {stakeInfo?.displayValue}
+                </p>
                 <p id="withdrawStatus" style={{ color: "green" }}></p>
               </div>
             </div>
