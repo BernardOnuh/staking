@@ -1,8 +1,10 @@
 import React from 'react'
 import { useState,useEffect } from 'react'
 import { ethers } from 'ethers'
-import Earned from './earned'
 import { ConnectWallet, useContract, useContractWrite, Web3Button, useAddress, useTokenBalance, useContractRead } from '@thirdweb-dev/react'
+import BalanceOf from './ReadContract/balanceOf';
+import Earned from './ReadContract/earned';
+import Rewards from './ReadContract/rewards';
 
 
 
@@ -90,12 +92,12 @@ const Stake = () => {
                   <Web3Button
                   className="py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300"
                   contractAddress={StakingTokenAddress}
-                  action = {() => mutateAsync([StakingcontractAddress,c(amountToStake)])}
+                  action = {() => mutateAsync([StakingcontractAddress,(amountToStake)])}
                   onSuccess={(result) => alert("Success!")}
                   accentColor= '#7245FA'
                   >Aprove</Web3Button>
                   </div>
-                  <Earned/>
+                  <BalanceOf/>
                   <div className='py-2 px-6'>
                   <Web3Button
                   contractAddress={StakingcontractAddress}
@@ -107,7 +109,7 @@ const Stake = () => {
                     } }>
                     Stake</Web3Button>
                     </div>
-                    
+                    <Earned/>    
                 <div className='py-2 px-6'>
                 <Web3Button
                 contractAddress={StakingcontractAddress}
@@ -149,13 +151,8 @@ const Stake = () => {
                     } }>
                     Unstake</Web3Button>
                     </div>
+                    <Rewards/>
                 </label>
-                <p className='text-black'>
-                Balance Of:  
-                </p>            
-                <p className='text-black'>
-                 {stakeInfo?.displayValue}
-                </p>
                 <p id="withdrawStatus" style={{ color: "green" }}></p>
               </div>
             </div>
