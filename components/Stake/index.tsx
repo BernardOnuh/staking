@@ -90,7 +90,7 @@ const Stake = () => {
                   <Web3Button
                   className="py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300"
                   contractAddress={StakingTokenAddress}
-                  action = {() => mutateAsync([StakingcontractAddress,ethers.utils.parseEther(amountToStake)])}
+                  action = {() => mutateAsync([StakingcontractAddress,c(amountToStake)])}
                   onSuccess={(result) => alert("Success!")}
                   accentColor= '#7245FA'
                   >Aprove</Web3Button>
