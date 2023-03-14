@@ -4,7 +4,7 @@ import ethers from 'ethers'
 
 const Rewards = () => {
     const address = useAddress();
-    const contractAddress = '0x224e7d3f735D5893A91Dc73905f5c2722370518e';
+    const contractAddress = '0x1dd93d54A54A56761bdA2416B8429b64e19a7A03';
     const { contract } = useContract(contractAddress);
     const { data, isLoading, error } = useContractRead(contract,'rewards', address || "0" );
     const formattedData = data/1000000000000000000;

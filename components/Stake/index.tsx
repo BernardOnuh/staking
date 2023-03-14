@@ -12,9 +12,9 @@ const Stake = () => {
       const address = useAddress();
       const [amountToStake, setAmountToStake ] = useState('');
       const [withdrawAmount, setWithdrawAmount] = useState('');
-      const StakingcontractAddress = '0x224e7d3f735D5893A91Dc73905f5c2722370518e';
+      const StakingcontractAddress = '0x1dd93d54A54A56761bdA2416B8429b64e19a7A03';
       const StakingTokenAddress = '0xeA8BFB6270Cb8b95B283E4E78b2BD4214e90F224';
-      const RewardTokenAddress = '0x08110Be445B44d63BdeCf899911DFFb203B8a0B0';
+      const RewardTokenAddress = '0x665271f9C8CB4a3E438251d1Ec46413650F514D6';
       const { contract } = useContract(StakingTokenAddress);
       const { mutateAsync, isLoading, error} = useContractWrite( contract, 'approve');
       const { contract: stakingToken, isLoading:isStakingTokenLoading} = useContract(StakingTokenAddress);
