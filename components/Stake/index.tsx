@@ -13,8 +13,8 @@ const Stake = () => {
       const [amountToStake, setAmountToStake ] = useState('');
       const [withdrawAmount, setWithdrawAmount] = useState('');
       const StakingcontractAddress = '0x1dd93d54A54A56761bdA2416B8429b64e19a7A03';
-      const StakingTokenAddress = '0xeA8BFB6270Cb8b95B283E4E78b2BD4214e90F224';
-      const RewardTokenAddress = '0x665271f9C8CB4a3E438251d1Ec46413650F514D6';
+      const StakingTokenAddress = '0x665271f9C8CB4a3E438251d1Ec46413650F514D6';
+      const RewardTokenAddress = '0x120DD0Cca327fAD5766a764B09aa672052a1F0aA';
       const { contract } = useContract(StakingTokenAddress);
       const { mutateAsync, isLoading, error} = useContractWrite( contract, 'approve');
       const { contract: stakingToken, isLoading:isStakingTokenLoading} = useContract(StakingTokenAddress);
@@ -92,7 +92,7 @@ const Stake = () => {
                   <Web3Button
                   className="py-2 px-2 font-medium text-white bg-[#7245FA] rounded transition duration-300"
                   contractAddress={StakingTokenAddress}
-                  action = {() => mutateAsync([StakingcontractAddress,(amountToStake)])}
+                  action = {() => mutateAsync([StakingcontractAddress,ethers.utils.parseEther(amountToStake)])}
                   onSuccess={(result) => alert("Success!")}
                   accentColor= '#7245FA'
                   >Aprove</Web3Button>
