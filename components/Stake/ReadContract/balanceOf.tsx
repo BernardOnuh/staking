@@ -4,7 +4,7 @@ import ethers from 'ethers'
 
 const BalanceOf = () => {
     const address = useAddress();
-    const contractAddress = '0x38076257254c71388583dfC0C24804df4Bb12818';
+    const contractAddress = '0x224e7d3f735D5893A91Dc73905f5c2722370518e';
     const { contract } = useContract(contractAddress);
     const { data, isLoading, error } = useContractRead(contract,'balanceOf', address || "0" );
     const formattedData = data/1000000000000000000;
